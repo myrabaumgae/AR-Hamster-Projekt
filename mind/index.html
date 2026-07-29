@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+
+            /* Button Styling */
+            .back-button {
+                position: absolute;
+                z-index: 1000;
+                top: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                background: #333;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-family: sans-serif;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Falls MindAR eine weiße Fläche zeigt, erzwingen wir die Transparenz */
+            .a-canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button
+            class="back-button"
+            onclick="window.location.href = '../index.html'"
+        >
+            Zurück zum Menü
+        </button>
+
+        <a-scene
+            mindar-image="imageTargetSrc: ./Hamster.mind; uiLoading: no; uiScanning: no;"
+            color-space="sRGB"
+            renderer="colorManagement: true, physicallyCorrectLights"
+            vr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false"
+        >
+            <a-assets>
+                <a-asset-item
+                    id="Hamster"
+                    src="../Hamster AR Projekt1.glb"
+                ></a-asset-item>
+            </a-assets>
+
+            <a-camera
+                position="0 0 0"
+                look-controls="enabled: false"
+            ></a-camera>
+
+            <a-entity mindar-image-target="targetIndex: 0">
+                <a-gltf-model
+                    src="#gearsModel"
+                    rotation="90 0 0"
+                    position="0 0 0"
+                    scale="0.1 0.1 0.1"
+                    animation-mixer
+                >
+                </a-gltf-model>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>
