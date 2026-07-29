@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Web-AR Auswahl</title>
+        <script
+            type="module"
+            src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+        ></script>
+        <style>
+            body {
+                margin: 0;
+                font-family: sans-serif;
+                background: #f0f0f0;
+            }
+
+            /* Grid-Menü */
+            .grid-menu {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                padding: 20px;
+            }
+            button {
+                padding: 15px;
+                cursor: pointer;
+                border: none;
+                background: #333;
+                color: white;
+                border-radius: 8px;
+            }
+
+            /* Viewer Container */
+            #container {
+                width: 100%;
+                height: 80vh;
+            }
+            model-viewer {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="grid-menu">
+            <button onclick="loadModel('Hamster AR Projekt1.glb')">
+                Hamsterkäfig
+            </button>
+          
+            <button onclick="location.href = 'mind/index.html'">
+                QR-Tracked Stuff
+            </button>
+        </div>
+
+        <div id="debug-info"></div>
+
+        <div id="container">
+            <model-viewer
+                id="viewer"
+                poster="AR Hamster Projekt Bild.jpeg"
+                ar
+                camera-controls
+                autoplay
+            >
+            </model-viewer>
+        </div>
+
+        <script>
+            const viewer = document.querySelector("#viewer");
+            const debugBox = document.getElementById("debug-info");
+            const isFirefox = navigator.userAgent
+                .toLowerCase()
+                .includes("firefox");
+
+            // Funktion 1 & 2: Modell wechseln
+            function loadModel(modelName) {
+                viewer.src = modelName;
+                checkBrowser();
+            }
+
+            function checkBrowser() {
+                if (isFirefox) {
+                    debugBox.innerText =
+                        "Hinweis: Bitte wechsle für AR zu Chrome oder Safari.";
+                }
+            }
+        </script>
+    </body>
+</html>
